@@ -109,7 +109,8 @@ int main() {
             Color bgColor = Fade(GREEN, 0.25f * alpha);
             Color textColor = Fade(GREEN, alpha);
 
-            DrawRectangle(x - 15, (int)toastY - 15, (int)msgSizeVec.x + 30, toastSize + 30, bgColor);
+	    DrawRectangle(x - 15, (int)toastY - 15, (int)msgSizeVec.x + 30, toastSize + 30, bgColor);
+	    DrawText("✅", x - 40, (int)toastY + 5, fontSize, textColor);
             DrawTextEx(customFont, message, (Vector2){x, (int)toastY}, toastSize, 1, textColor);
         }
 
