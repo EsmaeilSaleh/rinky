@@ -12,7 +12,7 @@ static float Clamp(float value, float min, float max) {
 
 int main() {
 	Font customFont = LoadFont("Brunson.ttf");
-	if (!customFont.texture.id) {
+	if (customFont.baseSize == 0 || customFont.glyphCount == 0) {
 		TraceLog(LOG_ERROR, "Failed to load custom font!");
 		return 1;
 	}
