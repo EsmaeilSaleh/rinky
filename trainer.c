@@ -32,7 +32,6 @@ int main() {
 	bool showToast = false;
 	double toastStart = 0.0;
 	float toastY = -50;   // Start above screen for slide effect
-	DrawText(TextFormat("Time since start: %.2f seconds", GetTime()), 10, 10, 20, BLACK);
 	while (!WindowShouldClose()) {
 		int key = GetCharPressed();
 		if (key >= 32 && key <= 126 && inputIndex < (int)strlen(target)) {
@@ -74,6 +73,7 @@ int main() {
 
 		BeginDrawing();
 
+		DrawText(TextFormat("Time since start: %.2f seconds", GetTime()), 10, 10, 20, BLACK);
 		// Gradient background (top blue to bottom white)
 		for (int y = 0; y < screenHeight; y++) {
 			float t = (float)y / screenHeight;
