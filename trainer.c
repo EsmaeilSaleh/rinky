@@ -102,7 +102,7 @@ int main() {
 			Color textColor = Fade(GREEN, alpha);
 
 			DrawRectangle(x - 15, (int)toastY - 15, textWidth + 30, fontSize + 30, bgColor);
-			DrawTextEx(message, x, (int)toastY, fontSize, textColor);
+			DrawTextEx(customFont, message, x, (int)toastY, fontSize, textColor);
 		DrawText(TextFormat("Time since start: %.1f seconds", GetTime()), 10, 10, 20, BLACK);
 		}
 
