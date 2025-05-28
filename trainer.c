@@ -80,7 +80,7 @@ int main() {
 			Color c = ColorLerp(BLUE, RAYWHITE, t);
 			DrawLine(0, y, screenWidth, y, c);
 		}
-
+		    DrawTextEx(font, "Test Font!", (Vector2){100, 100}, 40, 1, BLACK);
 		// Draw instructions
 		DrawTextEx(customFont, "Type this word:", (Vector2){screenWidth/2 - MeasureText("Type this word:", 24)/2, 80}, 24, 1, DARKGRAY);
 
