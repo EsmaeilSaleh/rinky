@@ -1,23 +1,26 @@
-# Compiler
 CC = gcc
-
-# Paths
 RAYLIB_DIR = ../raylib/src
 
-# Flags
-CFLAGS = -I$(RAYLIB_DIR)
-LDFLAGS = -L$(RAYLIB_DIR) -lraylib -lm -ldl -lpthread -lGL -lrt -lX11
-
-# Source and Target
 SRC = trainer.c
 TARGET = trainer
+CFLAGS = -I$(RAYLIB_DIR)
 
-# Default build target
+# Detect OS for linker flags
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)
+    LDFLAGS = -L$(RAYLIB_DIR) -lraylib -lm -ldl -lpthread -lGL -lrt -lX11
+endif
+
+ifeq ($(UNAME_S),Darwin)  # macOS
+    LDFLAGS = -L$(RAYLIB_DIR) -lraylib -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo -lpthread -lm
+endif
+
 all: $(TARGET)
 
 $(TARGET): $(SRC)
 	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
 
-# Clean
 clean:
 	rm -f $(TARGET)
+
