@@ -10,7 +10,7 @@ static float Clamp(float value, float min, float max) {
 }
 
 int main() {
-	Font customFont = LoadFont("Roboto-Regular.ttf");
+	Font customFont = LoadFont("Brunson.ttf");
 	const int screenWidth = 800;
 	const int screenHeight = 450;
 	InitWindow(screenWidth, screenHeight, "Typing Trainer - Improved UI");
