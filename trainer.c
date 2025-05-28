@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 static float Clamp(float value, float min, float max) {
     if (value < min) return min;
