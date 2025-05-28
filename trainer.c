@@ -103,7 +103,6 @@ int main() {
         // Toast
         if (showToast) {
             const char* message = "Correct!";
-	    const int fontSize = 36;
             Vector2 msgSizeVec = MeasureTextEx(customFont, message, toastSize, 1);
             int x = 800 - (int)msgSizeVec.x - 40;
             float alpha = Clamp((toastY + 50) / 80, 0, 1);
@@ -111,7 +110,6 @@ int main() {
             Color textColor = Fade(GREEN, alpha);
 
 	    DrawRectangle(x - 15, (int)toastY - 15, (int)msgSizeVec.x + 30, toastSize + 30, bgColor);
-	    DrawText("✅", x - 40, (int)toastY + 5, fontSize, textColor);
             DrawTextEx(customFont, message, (Vector2){x, (int)toastY}, toastSize, 1, textColor);
         }
 
