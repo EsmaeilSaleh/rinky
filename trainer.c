@@ -73,7 +73,6 @@ int main() {
 
 		BeginDrawing();
 
-		DrawText(TextFormat("Time since start: %.2f seconds", GetTime()), 10, 10, 20, BLACK);
 		// Gradient background (top blue to bottom white)
 		for (int y = 0; y < screenHeight; y++) {
 			float t = (float)y / screenHeight;
@@ -103,6 +102,7 @@ int main() {
 
 			DrawRectangle(x - 15, (int)toastY - 15, textWidth + 30, fontSize + 30, bgColor);
 			DrawText(message, x, (int)toastY, fontSize, textColor);
+		DrawText(TextFormat("Time since start: %.2f seconds", GetTime()), 10, 10, 20, BLACK);
 		}
 
 		EndDrawing();
