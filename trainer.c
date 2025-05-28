@@ -16,7 +16,7 @@ int main() {
     SetTargetFPS(60);
     srand(time(NULL));
 
-    Font customFont = LoadFont("Brunson.ttf");
+    Font customFont = LoadFont("Robot-Regular.ttf");
 
     // ✅ Proper font load check
     if (customFont.baseSize == 0 || customFont.glyphCount == 0) {
