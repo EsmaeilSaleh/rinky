@@ -3,6 +3,13 @@
 #include <stdlib.h>
 #include <time.h>
 
+static float Clamp(float value, float min, float max) {
+    if (value < min) return min;
+    if (value > max) return max;
+    return value;
+}
+
+
 int main() {
     const int screenWidth = 800;
     const int screenHeight = 450;
