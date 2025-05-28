@@ -12,6 +12,11 @@ static float Clamp(float value, float min, float max) {
 
 int main() {
 	Font customFont = LoadFont("Brunson.ttf");
+	if (!customFont.texture.id) {
+		TraceLog(LOG_ERROR, "Failed to load custom font!");
+		return 1;
+	}
+
 	const int screenWidth = 800;
 	const int screenHeight = 450;
 	InitWindow(screenWidth, screenHeight, "Typing Trainer - Improved UI");
