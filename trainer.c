@@ -102,7 +102,7 @@ int main() {
 
 			DrawRectangle(x - 15, (int)toastY - 15, textWidth + 30, fontSize + 30, bgColor);
 			DrawText(message, x, (int)toastY, fontSize, textColor);
-		DrawText(TextFormat("Time since start: %.2f seconds", GetTime()), 10, 10, 20, BLACK);
+		DrawText(TextFormat("Time since start: %.4f seconds", GetTime()), 10, 10, 20, BLACK);
 		}
 
 		EndDrawing();
