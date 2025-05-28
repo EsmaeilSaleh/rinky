@@ -110,6 +110,7 @@ int main() {
 	}
 
 	UnloadSound(correctSound);
+	UnloadFont(customFont);
 	CloseAudioDevice();
 	CloseWindow();
 	return 0;
