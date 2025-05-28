@@ -16,7 +16,7 @@ int main() {
     SetTargetFPS(60);
     srand(time(NULL));
 
-    Font customFont = LoadFont("Roboto-Regular.ttf");
+    Font customFont = LoadFont("Roboto-Black.ttf");
 
     // ✅ Proper font load check
     if (customFont.baseSize == 0 || customFont.glyphCount == 0) {
