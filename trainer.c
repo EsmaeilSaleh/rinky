@@ -103,6 +103,7 @@ int main() {
         // Toast
         if (showToast) {
             const char* message = "Correct!";
+	    const int fontSize = 36;
             Vector2 msgSizeVec = MeasureTextEx(customFont, message, toastSize, 1);
             int x = 800 - (int)msgSizeVec.x - 40;
             float alpha = Clamp((toastY + 50) / 80, 0, 1);
