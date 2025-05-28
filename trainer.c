@@ -82,7 +82,7 @@ int main() {
 		}
 
 		// Draw instructions
-		DrawText("Type this word:", screenWidth/2 - MeasureText("Type this word:", 24)/2, 80, 24, DARKGRAY);
+		DrawTextEx(customFont, "Type this word:", (Vector2){screenWidth/2 - MeasureText("Type this word:", 24)/2, 80}, 24, 1, DARKGRAY);
 
 		// Draw target word (centered, bigger)
 		DrawText(target, screenWidth/2 - MeasureText(target, 70)/2, 140, 70, DARKBLUE);
