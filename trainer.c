@@ -85,9 +85,6 @@ int main() {
         int inputSize = 60;
         int toastSize = 36;
 
-        // Text: "Test Font!" (for preview)
-        DrawTextEx(customFont, "Test Font!", (Vector2){100, 100}, titleSize, 1, BLACK);
-
         // Text: "Type this word:"
         Vector2 labelSizeVec = MeasureTextEx(customFont, "Type this word:", labelSize, 1);
         DrawTextEx(customFont, "Type this word:", 
