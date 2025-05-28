@@ -9,7 +9,6 @@ static float Clamp(float value, float min, float max) {
     return value;
 }
 
-
 int main() {
     const int screenWidth = 800;
     const int screenHeight = 450;
