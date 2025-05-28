@@ -14,7 +14,7 @@ int main() {
 	Sound correctSound = LoadSound("correct.wav");
 
 	const char* wordList[] = {
-		"lol", "plo", "9l9", "ll", "l9", "po", "lo", "ol", "9p9", "pol"
+		"lol", "plo", "9l9", "ll", "l9", "po", "lo", "ol", "9p9", "pol", ".l.", ".o.", ".9.", "..o", "/;/", "/p/", "/0/", "0;0", "pool", "9/0"
 	};
 	const int wordCount = sizeof(wordList) / sizeof(wordList[0]);
 
