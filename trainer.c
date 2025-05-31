@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdio.h>
 
 static float Clamp(float value, float min, float max) {
 	if (value < min) return min;
@@ -11,24 +10,18 @@ static float Clamp(float value, float min, float max) {
 }
 
 int main() {
-	InitWindow(800, 450, "Typing Trainer - Improved UI");
+	Font customFont = LoadFont("Roboto-Regular.ttf");
+	const int screenWidth = 800;
+	const int screenHeight = 450;
+	InitWindow(screenWidth, screenHeight, "Typing Trainer - Improved UI");
 	InitAudioDevice();
 	SetTargetFPS(60);
 	srand(time(NULL));
 
-	Font customFont = LoadFont("Roboto-Black.ttf");
-
-	// ✅ Proper font load check
-	if (customFont.baseSize == 0 || customFont.glyphCount == 0) {
-		TraceLog(LOG_ERROR, "Failed to load custom font!");
-		return 1;
-	}
-
 	Sound correctSound = LoadSound("correct.wav");
 
 	const char* wordList[] = {
-		"lol", "plo", "9l9", "ll", "l9", "po", "lo", "ol", "9p9", "pol",
-		".l.", ".o.", ".9.", "..o", "/;/", "/p/", "/0/", "0;0", "pool", "9/0"
+		"lol", "plo", "9l9", "ll", "l9", "po", "lo", "ol", "9p9", "pol", ".l.", ".o.", ".9.", "..o", "/;/", "/p/", "/0/", "0;0", "pool", "9/0"
 	};
 	const int wordCount = sizeof(wordList) / sizeof(wordList[0]);
 
@@ -36,10 +29,10 @@ int main() {
 	char input[32] = {0};
 	int inputIndex = 0;
 
+	// Toast message state
 	bool showToast = false;
 	double toastStart = 0.0;
-	float toastY = -50;
-
+	float toastY = -50;   // Start above screen for slide effect
 	while (!WindowShouldClose()) {
 		int key = GetCharPressed();
 		if (key >= 32 && key <= 126 && inputIndex < (int)strlen(target)) {
@@ -48,22 +41,32 @@ int main() {
 
 			if (strcmp(input, target) == 0) {
 				PlaySound(correctSound);
+
+				// Show toast
 				showToast = true;
 				toastStart = GetTime();
-				toastY = -50;
+				toastY = -50; // Reset position for slide down
+
+				// Load next word
 				inputIndex = 0;
 				input[0] = '\0';
 				target = wordList[rand() % wordCount];
 			} else if (inputIndex == strlen(target)) {
+				// Load next word even if wrong
 				inputIndex = 0;
 				input[0] = '\0';
 				target = wordList[rand() % wordCount];
 			}
 		}
 
+		// Update toast animation
 		if (showToast) {
+			// Slide down toast from top
 			if (toastY < 30) toastY += 4.0f;
+
+			// Hide toast after 1.5s
 			if (GetTime() - toastStart > 1.5) {
+				// Slide up before hiding
 				toastY -= 4.0f;
 				if (toastY < -50) showToast = false;
 			}
@@ -71,55 +74,37 @@ int main() {
 
 		BeginDrawing();
 
-		// Gradient background
-		for (int y = 0; y < 450; y++) {
-			float t = (float)y / 450;
+		// Gradient background (top blue to bottom white)
+		for (int y = 0; y < screenHeight; y++) {
+			float t = (float)y / screenHeight;
 			Color c = ColorLerp(BLUE, RAYWHITE, t);
-			DrawLine(0, y, 800, y, c);
+			DrawLine(0, y, screenWidth, y, c);
 		}
 
-		// Font sizes
-		int titleSize = 40;
-		int labelSize = 24;
-		int targetSize = 70;
-		int inputSize = 60;
-		int toastSize = 36;
+		// Draw instructions
+		DrawTextEx(customFont, "Type this word:", (Vector2){screenWidth/2 - MeasureText("Type this word:", 24)/2, 80}, 24, 1, DARKGRAY);
 
-		// Text: "Test Font!" (for preview)
-		DrawTextEx(customFont, "Test Font!", (Vector2){100, 100}, titleSize, 1, BLACK);
+		// Draw target word (centered, bigger)
+		DrawText(target, screenWidth/2 - MeasureText(target, 70)/2, 140, 70, DARKBLUE);
 
-		// Text: "Type this word:"
-		Vector2 labelSizeVec = MeasureTextEx(customFont, "Type this word:", labelSize, 1);
-		DrawTextEx(customFont, "Type this word:", 
-				(Vector2){400 - labelSizeVec.x / 2, 80}, labelSize, 1, DARKGRAY);
+		// Draw input (centered, bold color)
+		DrawText(input, screenWidth/2 - MeasureText(input, 60)/2, 260, 60, MAROON);
 
-		// Target word
-		Vector2 targetSizeVec = MeasureTextEx(customFont, target, targetSize, 1);
-		DrawTextEx(customFont, target, 
-				(Vector2){400 - targetSizeVec.x / 2, 140}, targetSize, 1, DARKBLUE);
-
-		// Input
-		Vector2 inputSizeVec = MeasureTextEx(customFont, input, inputSize, 1);
-		DrawTextEx(customFont, input, 
-				(Vector2){400 - inputSizeVec.x / 2, 260}, inputSize, 1, MAROON);
-
-		// Toast
+		// Draw toast message with slide + fade
 		if (showToast) {
+			int fontSize = 36;
 			const char* message = "✅ Correct!";
-			Vector2 msgSizeVec = MeasureTextEx(customFont, message, toastSize, 1);
-			int x = 800 - (int)msgSizeVec.x - 40;
-			float alpha = Clamp((toastY + 50) / 80, 0, 1);
+			int textWidth = MeasureText(message, fontSize);
+			int x = screenWidth - textWidth - 40;
+
+			float alpha = Clamp((toastY + 50) / 80, 0, 1); // 0 when above, 1 fully visible
 			Color bgColor = Fade(GREEN, 0.25f * alpha);
 			Color textColor = Fade(GREEN, alpha);
 
-			DrawRectangle(x - 15, (int)toastY - 15, (int)msgSizeVec.x + 30, toastSize + 30, bgColor);
-			DrawTextEx(customFont, message, (Vector2){x, (int)toastY}, toastSize, 1, textColor);
+			DrawRectangle(x - 15, (int)toastY - 15, textWidth + 30, fontSize + 30, bgColor);
+			DrawTextEx(customFont, message, (Vector2){x, (int)toastY}, fontSize, 1.0f, textColor);
+			DrawText(TextFormat("Time since start: %.1f seconds", GetTime()), 10, 10, 20, BLACK);
 		}
-
-		// Timer
-		char timerText[64];
-		snprintf(timerText, sizeof(timerText), "Time since start: %.1f seconds", GetTime());
-		DrawTextEx(customFont, timerText, (Vector2){10, 10}, 20, 1, BLACK);
 
 		EndDrawing();
 	}
@@ -130,3 +115,4 @@ int main() {
 	CloseWindow();
 	return 0;
 }
+
