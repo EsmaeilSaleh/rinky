@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdio.h>
 
 static float Clamp(float value, float min, float max) {
 	if (value < min) return min;
@@ -16,16 +15,12 @@ int main() {
 	SetTargetFPS(60);
 	srand(time(NULL));
 
-	Font customFont;
-	if (!FileExists("Roboto-Black.ttf")) {
-		TraceLog(LOG_WARNING, "Font file not found. Using default font.");
-		customFont = GetFontDefault();
-	} else {
-		customFont = LoadFont("Roboto-Black.ttf");
-		if (customFont.baseSize == 0 || customFont.glyphCount == 0) {
-			TraceLog(LOG_ERROR, "Failed to load custom font. Using default.");
-			customFont = GetFontDefault();
-		}
+	Font customFont = LoadFont("Brunson.ttf");
+
+	// ✅ Proper font load check
+	if (customFont.baseSize == 0 || customFont.glyphCount == 0) {
+		TraceLog(LOG_ERROR, "Failed to load custom font!");
+		return 1;
 	}
 
 	Sound correctSound = LoadSound("correct.wav");
@@ -46,7 +41,6 @@ int main() {
 
 	while (!WindowShouldClose()) {
 		int key = GetCharPressed();
-		if (key > 0) printf("Pressed key: %c (%d)\n", key, key);
 		if (key >= 32 && key <= 126 && inputIndex < (int)strlen(target)) {
 			input[inputIndex++] = (char)key;
 			input[inputIndex] = '\0';
@@ -75,50 +69,56 @@ int main() {
 		}
 
 		BeginDrawing();
-		ClearBackground(RAYWHITE);
 
+		// Gradient background
+		for (int y = 0; y < 450; y++) {
+			float t = (float)y / 450;
+			Color c = ColorLerp(BLUE, RAYWHITE, t);
+			DrawLine(0, y, 800, y, c);
+		}
 
-		// Scaled down font sizes
-		int labelSize = 20;
-		int targetSize = 40;
-		int inputSize = 36;
-		int toastSize = 28;
+		// Font sizes
+		int titleSize = 40;
+		int labelSize = 24;
+		int targetSize = 70;
+		int inputSize = 60;
+		int toastSize = 36;
 
-		// Label
-		Vector2 labelVec = MeasureTextEx(customFont, "Type this word:", labelSize, 1);
-		printf("Label width: %.2f\n", labelVec.x);
+		// Text: "Test Font!" (for preview)
+		DrawTextEx(customFont, "Test Font!", (Vector2){100, 100}, titleSize, 1, BLACK);
+
+		// Text: "Type this word:"
+		Vector2 labelSizeVec = MeasureTextEx(customFont, "Type this word:", labelSize, 1);
 		DrawTextEx(customFont, "Type this word:", 
-				(Vector2){400 - labelVec.x / 2, 80}, labelSize, 1, DARKGRAY);
+				(Vector2){400 - labelSizeVec.x / 2, 80}, labelSize, 1, DARKGRAY);
 
 		// Target word
-		Vector2 targetVec = MeasureTextEx(customFont, target, targetSize, 1);
-		printf("Target word: %s | width: %.2f\n", target, targetVec.x);
+		Vector2 targetSizeVec = MeasureTextEx(customFont, target, targetSize, 1);
 		DrawTextEx(customFont, target, 
-				(Vector2){400 - targetVec.x / 2, 140}, targetSize, 1, DARKBLUE);
+				(Vector2){400 - targetSizeVec.x / 2, 140}, targetSize, 1, DARKBLUE);
 
 		// Input
-		Vector2 inputVec = MeasureTextEx(customFont, input, inputSize, 1);
-		printf("Input: %s | width: %.2f\n", input, inputVec.x);
+		Vector2 inputSizeVec = MeasureTextEx(customFont, input, inputSize, 1);
 		DrawTextEx(customFont, input, 
-				(Vector2){400 - inputVec.x / 2, 260}, inputSize, 1, MAROON);
+				(Vector2){400 - inputSizeVec.x / 2, 260}, inputSize, 1, MAROON);
 
 		// Toast
 		if (showToast) {
-			const char* message = "Correct!";
-			Vector2 msgVec = MeasureTextEx(customFont, message, toastSize, 1);
-			int x = 800 - (int)msgVec.x - 40;
+			const char* message = "✅ Correct!";
+			Vector2 msgSizeVec = MeasureTextEx(customFont, message, toastSize, 1);
+			int x = 800 - (int)msgSizeVec.x - 40;
 			float alpha = Clamp((toastY + 50) / 80, 0, 1);
 			Color bgColor = Fade(GREEN, 0.25f * alpha);
 			Color textColor = Fade(GREEN, alpha);
 
-			DrawRectangle(x - 15, (int)toastY - 15, (int)msgVec.x + 30, toastSize + 30, bgColor);
+			DrawRectangle(x - 15, (int)toastY - 15, (int)msgSizeVec.x + 30, toastSize + 30, bgColor);
 			DrawTextEx(customFont, message, (Vector2){x, (int)toastY}, toastSize, 1, textColor);
 		}
 
 		// Timer
 		char timerText[64];
 		snprintf(timerText, sizeof(timerText), "Time since start: %.1f seconds", GetTime());
-		DrawTextEx(customFont, timerText, (Vector2){10, 10}, 18, 1, BLACK);
+		DrawTextEx(customFont, timerText, (Vector2){10, 10}, 20, 1, BLACK);
 
 		EndDrawing();
 	}
