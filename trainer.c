@@ -46,6 +46,7 @@ int main() {
 
 	while (!WindowShouldClose()) {
 		int key = GetCharPressed();
+		if (key > 0) printf("Pressed key: %c (%d)\n", key, key);
 		if (key >= 32 && key <= 126 && inputIndex < (int)strlen(target)) {
 			input[inputIndex++] = (char)key;
 			input[inputIndex] = '\0';
