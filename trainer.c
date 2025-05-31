@@ -76,12 +76,6 @@ int main() {
 
 		BeginDrawing();
 
-		// Gradient background
-		for (int y = 0; y < 450; y++) {
-			float t = (float)y / 450;
-			Color c = ColorLerp(BLUE, RAYWHITE, t);
-			DrawLine(0, y, 800, y, c);
-		}
 
 		// Scaled down font sizes
 		int labelSize = 20;
