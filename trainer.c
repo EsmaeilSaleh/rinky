@@ -75,6 +75,7 @@ int main() {
 		}
 
 		BeginDrawing();
+		ClearBackground(RAYWHITE);
 
 
 		// Scaled down font sizes
