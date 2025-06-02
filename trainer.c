@@ -98,8 +98,6 @@ int main() {
 			DrawText(message, x, (int)toastY, fontSize, textColor);
 		}
 
-		// Always draw timer
-		DrawText(TextFormat("Time since start: %.1f seconds", GetTime()), 10, 10, 20, BLACK);
 
 		EndDrawing();
 	}
