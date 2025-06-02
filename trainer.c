@@ -82,7 +82,7 @@ int main() {
 		DrawText(target, 200, 240, 70, DARKBLUE);
 
 		// Draw input (centered, bold color)
-		DrawText(input, 140, 360, 60, MAROON);
+		DrawText(TextFormat("x: %d", text_width), 140, 360, 60, MAROON);
 
 		// Draw toast message with slide + fade
 		if (showToast) {
