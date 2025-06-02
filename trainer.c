@@ -45,7 +45,7 @@ int main() {
 				// Show toast
 				showToast = true;
 				toastStart = GetTime();
-				toastY = -50; // Reset position for slide down
+				toastY = -100; // Reset position for slide down
 
 				// Load next word
 				inputIndex = 0;
