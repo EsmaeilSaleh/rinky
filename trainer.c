@@ -79,7 +79,7 @@ int main() {
 		DrawText("Type this word:", 50, 80, 24, DARKGRAY);
 
 		// Draw target word (centered, bigger)
-		DrawText(TextFormat("x: %d", screenHeight), 200, 240, 70, DARKBLUE);
+		DrawText(target, 200, 240, 70, DARKBLUE);
 
 		// Draw input (centered, bold color)
 		DrawText(input, 140, 360, 60, MAROON);
