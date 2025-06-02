@@ -71,10 +71,8 @@ int main() {
 				if (toastY < -50) showToast = false;
 			}
 		}
-
 		BeginDrawing();
-		ClearBackground(RAYWHITE);  // or any color like DARKBLUE
-
+		ClearBackground(RAYWHITE);
 
 		// Draw instructions
 		DrawTextEx(customFont, "Type this word:", (Vector2){screenWidth/2 - MeasureText("Type this word:", 24)/2, 80}, 24, 1, DARKGRAY);
@@ -92,14 +90,16 @@ int main() {
 			int textWidth = MeasureText(message, fontSize);
 			int x = screenWidth - textWidth - 40;
 
-			float alpha = Clamp((toastY + 50) / 80, 0, 1); // 0 when above, 1 fully visible
+			float alpha = Clamp((toastY + 50) / 80, 0, 1);
 			Color bgColor = Fade(GREEN, 0.25f * alpha);
 			Color textColor = Fade(GREEN, alpha);
 
 			DrawRectangle(x - 15, (int)toastY - 15, textWidth + 30, fontSize + 30, bgColor);
 			DrawTextEx(customFont, message, (Vector2){x, (int)toastY}, fontSize, 1.0f, textColor);
-			DrawText(TextFormat("Time since start: %.1f seconds", GetTime()), 10, 10, 20, BLACK);
 		}
+
+		// ✅ Always draw timer
+		DrawText(TextFormat("Time since start: %.1f seconds", GetTime()), 10, 10, 20, BLACK);
 
 		EndDrawing();
 	}
