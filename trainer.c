@@ -74,7 +74,7 @@ int main() {
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
 
-		int text_width = (target, 70);
+		int text_width = MeasureText(target, 70);
 		// Draw instructions
 		DrawText("Type this word:", 50, 80, 24, DARKGRAY);
 
