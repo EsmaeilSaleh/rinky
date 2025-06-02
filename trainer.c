@@ -45,7 +45,7 @@ int main() {
 				// Show toast
 				showToast = true;
 				toastStart = GetTime();
-				toastY = -100; // Reset position for slide down
+				toastY = -50; // Reset position for slide down
 
 				// Load next word
 				inputIndex = 0;
@@ -82,14 +82,14 @@ int main() {
 		DrawText(target, 200 - text_width/2, 240, 70, DARKBLUE);
 
 		// Draw input (centered, bold color)
-		DrawText(TextFormat("x: %d", text_width), 140, 360, 60, MAROON);
+		DrawText(input, 140, 360, 60, MAROON);
 
 		// Draw toast message with slide + fade
 		if (showToast) {
 			int fontSize = 36;
 			const char* message = "✅ Correct!";
 			int textWidth = MeasureText(message, fontSize);
-			int x = screenWidth - textWidth - 40;
+			int x = 200 - textWidth - 40;
 
 			float alpha = Clamp((toastY + 50) / 80, 0, 1);
 			Color bgColor = Fade(GREEN, 0.25f * alpha);
