@@ -81,7 +81,7 @@ int main() {
 		DrawText(target, 50, 40, 70, DARKBLUE);
 
 		// Draw input (centered, bold color)
-		DrawText(input, 50, 260, 60, MAROON);
+		DrawText(input, 50, 60, 60, MAROON);
 
 		// Draw toast message with slide + fade
 		if (showToast) {
