@@ -75,7 +75,7 @@ int main() {
 		ClearBackground(RAYWHITE);
 
 		// Draw instructions
-		DrawTextEx(customFont, "Type this word:", (Vector2){screenWidth/2 - MeasureText("Type this word:", 24)/2, 80}, 24, 1, DARKGRAY);
+		DrawText("Type this word:", screenWidth/2 - MeasureText("Type this word:", 24)/2, 80, 24, DARKGRAY);
 
 		// Draw target word (centered, bigger)
 		DrawText(target, screenWidth/2 - MeasureText(target, 70)/2, 140, 70, DARKBLUE);
@@ -95,10 +95,10 @@ int main() {
 			Color textColor = Fade(GREEN, alpha);
 
 			DrawRectangle(x - 15, (int)toastY - 15, textWidth + 30, fontSize + 30, bgColor);
-			DrawTextEx(customFont, message, (Vector2){x, (int)toastY}, fontSize, 1.0f, textColor);
+			DrawText(message, x, (int)toastY, fontSize, textColor);
 		}
 
-		// ✅ Always draw timer
+		// Always draw timer
 		DrawText(TextFormat("Time since start: %.1f seconds", GetTime()), 10, 10, 20, BLACK);
 
 		EndDrawing();
