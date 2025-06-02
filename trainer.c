@@ -78,10 +78,10 @@ int main() {
 		DrawText("Type this word:", 50, 80, 24, DARKGRAY);
 
 		// Draw target word (centered, bigger)
-		DrawText(target, 50, 40, 70, DARKBLUE);
+		DrawText(target, 50, 340, 70, DARKBLUE);
 
 		// Draw input (centered, bold color)
-		DrawText(input, 50, 60, 60, MAROON);
+		DrawText(input, 50, 360, 60, MAROON);
 
 		// Draw toast message with slide + fade
 		if (showToast) {
