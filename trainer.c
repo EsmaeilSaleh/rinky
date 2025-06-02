@@ -89,7 +89,7 @@ int main() {
 			int fontSize = 36;
 			const char* message = "✅ Correct!";
 			int textWidth = MeasureText(message, fontSize);
-			int x = 200 - textWidth - 40;
+			int x = 200 - textWidth;
 
 			float alpha = Clamp((toastY + 50) / 80, 0, 1);
 			Color bgColor = Fade(GREEN, 0.25f * alpha);
