@@ -74,12 +74,6 @@ int main() {
 
 		BeginDrawing();
 
-		// Gradient background (top blue to bottom white)
-		for (int y = 0; y < screenHeight; y++) {
-			float t = (float)y / screenHeight;
-			Color c = ColorLerp(BLUE, RAYWHITE, t);
-			DrawLine(0, y, screenWidth, y, c);
-		}
 
 		// Draw instructions
 		DrawTextEx(customFont, "Type this word:", (Vector2){screenWidth/2 - MeasureText("Type this word:", 24)/2, 80}, 24, 1, DARKGRAY);
