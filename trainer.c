@@ -75,13 +75,13 @@ int main() {
 		ClearBackground(RAYWHITE);
 
 		// Draw instructions
-		DrawText("Type this word:", screenWidth/2 - MeasureText("Type this word:", 24)/2, 80, 24, DARKGRAY);
+		DrawText("Type this word:", 50, 80, 24, DARKGRAY);
 
 		// Draw target word (centered, bigger)
-		DrawText(target, screenWidth/2 - MeasureText(target, 70)/2, 140, 70, DARKBLUE);
+		DrawText(target, 50, 140, 70, DARKBLUE);
 
 		// Draw input (centered, bold color)
-		DrawText(input, screenWidth/2 - MeasureText(input, 60)/2, 260, 60, MAROON);
+		DrawText(input, 50, 260, 60, MAROON);
 
 		// Draw toast message with slide + fade
 		if (showToast) {
