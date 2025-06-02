@@ -73,6 +73,7 @@ int main() {
 		}
 
 		BeginDrawing();
+		ClearBackground(RAYWHITE);  // or any color like DARKBLUE
 
 
 		// Draw instructions
